@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArenaHub Wireframe</title>
+    <style>
+        :root {
+            --bg: #f2f2f2;
+            --panel: #ffffff;
+            --line: #5a5a5a;
+            --muted: #8a8a8a;
+            --text: #2a2a2a;
+            --chip: #e6e6e6;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        .page {
+            width: min(1280px, 92vw);
+            margin: 28px auto 40px;
+        }
+
+        .title-bar {
+            background: var(--panel);
+            border: 2px solid var(--line);
+            padding: 18px;
+            margin-bottom: 18px;
+        }
+
+        .title-bar h1 {
+            margin: 0 0 6px;
+            font-size: 28px;
+        }
+
+        .title-bar p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .flow {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(120px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .flow .node {
+            border: 2px solid var(--line);
+            background: var(--panel);
+            padding: 10px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .flow .node::after {
+            content: ">";
+            position: absolute;
+            right: -9px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--line);
+            font-weight: 700;
+        }
+
+        .flow .node:last-child::after {
+            content: "";
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(320px, 1fr));
+            gap: 18px;
+        }
+
+        .screen {
+            background: var(--panel);
+            border: 2px solid var(--line);
+            padding: 14px;
+        }
+
+        .screen h2 {
+            margin: 0 0 12px;
+            font-size: 17px;
+        }
+
+        .frame {
+            border: 2px dashed var(--line);
+            padding: 10px;
+            min-height: 260px;
+            background: #fafafa;
+        }
+
+        .wire-nav,
+        .wire-row,
+        .wire-card,
+        .wire-input,
+        .wire-btn,
+        .wire-table-row,
+        .wire-chip,
+        .wire-hero,
+        .wire-side,
+        .wire-main,
+        .wire-chart,
+        .wire-slot,
+        .wire-alert {
+            border: 1.6px solid var(--line);
+            background: #fff;
+        }
+
+        .wire-nav {
+            height: 38px;
+            margin-bottom: 10px;
+            display: grid;
+            grid-template-columns: 1.4fr 2fr 1fr;
+            gap: 8px;
+            padding: 6px;
+        }
+
+        .wire-hero {
+            height: 78px;
+            margin-bottom: 10px;
+            padding: 7px;
+        }
+
+        .wire-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .wire-card {
+            min-height: 56px;
+            padding: 6px;
+        }
+
+        .wire-form {
+            border: 1.6px solid var(--line);
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        .wire-input {
+            height: 30px;
+            margin-bottom: 8px;
+        }
+
+        .wire-btn {
+            height: 30px;
+            width: 48%;
+            display: inline-block;
+        }
+
+        .wire-alert {
+            height: 26px;
+            margin-bottom: 8px;
+            background: var(--chip);
+        }
+
+        .wire-table {
+            border: 1.6px solid var(--line);
+        }
+
+        .wire-table-row {
+            height: 28px;
+            border-width: 0 0 1.6px 0;
+        }
+
+        .wire-table-row:last-child {
+            border-bottom: 0;
+        }
+
+        .wire-split {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 8px;
+        }
+
+        .wire-slot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+        }
+
+        .wire-slot {
+            height: 56px;
+        }
+
+        .wire-chip-row {
+            display: flex;
+            gap: 6px;
+            margin: 8px 0;
+        }
+
+        .wire-chip {
+            height: 24px;
+            width: 86px;
+            background: var(--chip);
+        }
+
+        .wire-admin {
+            display: grid;
+            grid-template-columns: 0.62fr 1.38fr;
+            gap: 8px;
+            min-height: 240px;
+        }
+
+        .wire-side {
+            padding: 8px;
+        }
+
+        .wire-main {
+            padding: 8px;
+        }
+
+        .wire-menu-item {
+            height: 28px;
+            border: 1.6px solid var(--line);
+            margin-bottom: 6px;
+            background: #fff;
+        }
+
+        .wire-chart {
+            height: 68px;
+            margin-bottom: 8px;
+        }
+
+        .legend {
+            margin-top: 20px;
+            border: 2px solid var(--line);
+            background: var(--panel);
+            padding: 12px;
+            font-size: 13px;
+        }
+
+        .legend strong {
+            display: inline-block;
+            min-width: 80px;
+        }
+
+        @media (max-width: 980px) {
+            .flow {
+                grid-template-columns: repeat(2, minmax(120px, 1fr));
+            }
+
+            .layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="title-bar">
+            <h1>Indoor Stadium Booking - Low Fidelity Wireframe</h1>
+            <p>Main screens mapped from your current PHP + MySQL project.</p>
+        </header>
+
+        <section class="flow" aria-label="Application flow">
+            <div class="node">Home</div>
+            <div class="node">Branches</div>
+            <div class="node">Login/Register</div>
+            <div class="node">Customer Dashboard</div>
+            <div class="node">Payment</div>
+            <div class="node">Receipt</div>
+            <div class="node">Admin Dashboard</div>
+        </section>
+
+        <main class="layout">
+            <article class="screen">
+                <h2>1. Home (index.php)</h2>
+                <div class="frame">
+                    <div class="wire-nav"></div>
+                    <div class="wire-hero"></div>
+                    <div class="wire-row">
+                        <div class="wire-card"></div>
+                        <div class="wire-card"></div>
+                        <div class="wire-card"></div>
+                    </div>
+                    <div class="wire-row">
+                        <div class="wire-card"></div>
+                        <div class="wire-card"></div>
+                        <div class="wire-card"></div>
+                    </div>
+                    <div class="wire-card" style="height: 42px;"></div>
+                </div>
+            </article>
+
+            <article class="screen">
+                <h2>2. Branches (branches.php)</h2>
+                <div class="frame">
+                    <div class="wire-nav"></div>
+                    <div class="wire-alert"></div>
+                    <div class="wire-row">
+                        <div class="wire-card"></div>
+                        <div class="wire-card"></div>
+                        <div class="wire-card"></div>
+                    </div>
+                    <div class="wire-row">
+                        <div class="wire-card"></div>
+                        <div class="wire-card"></div>
+                        <div class="wire-card"></div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="screen">
+                <h2>3. Login/Register/Forgot</h2>
+                <div class="frame">
+                    <div class="wire-form">
+                        <div class="wire-alert"></div>
+                        <div class="wire-input"></div>
+                        <div class="wire-input"></div>
+                        <div class="wire-input" style="height: 22px;"></div>
+                        <div class="wire-btn"></div>
+                        <div class="wire-btn" style="margin-left: 6px;"></div>
+                    </div>
+                    <div class="wire-form">
+                        <div class="wire-input"></div>
+                        <div class="wire-input"></div>
+                        <div class="wire-btn" style="width: 100%;"></div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="screen">
+                <h2>4. Customer Dashboard (customer_dashboard.php)</h2>
+                <div class="frame">
+                    <div class="wire-nav"></div>
+                    <div class="wire-hero"></div>
+                    <div class="wire-form">
+                        <div class="wire-row" style="grid-template-columns: 1fr 1fr 1fr;">
+                            <div class="wire-input"></div>
+                            <div class="wire-input"></div>
+                            <div class="wire-input"></div>
+                        </div>
+                    </div>
+                    <div class="wire-split">
+                        <div class="wire-card">
+                            <div class="wire-slot-grid">
+                                <div class="wire-slot"></div>
+                                <div class="wire-slot"></div>
+                                <div class="wire-slot"></div>
+                                <div class="wire-slot"></div>
+                            </div>
+                        </div>
+                        <div class="wire-card">
+                            <div class="wire-input"></div>
+                            <div class="wire-input"></div>
+                            <div class="wire-input"></div>
+                            <div class="wire-btn" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    <div class="wire-table" style="margin-top: 8px;">
+                        <div class="wire-table-row"></div>
+                        <div class="wire-table-row"></div>
+                        <div class="wire-table-row"></div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="screen">
+                <h2>5. Payment (payment.php)</h2>
+                <div class="frame">
+                    <div class="wire-nav"></div>
+                    <div class="wire-split">
+                        <div class="wire-form">
+                            <div class="wire-chip-row">
+                                <div class="wire-chip"></div>
+                                <div class="wire-chip"></div>
+                            </div>
+                            <div class="wire-input"></div>
+                            <div class="wire-input"></div>
+                            <div class="wire-row" style="grid-template-columns: 1fr 1fr;">
+                                <div class="wire-input"></div>
+                                <div class="wire-input"></div>
+                            </div>
+                            <div class="wire-input"></div>
+                            <div class="wire-btn" style="width: 100%;"></div>
+                        </div>
+                        <div class="wire-card">
+                            <div class="wire-alert"></div>
+                            <div class="wire-input"></div>
+                            <div class="wire-input"></div>
+                            <div class="wire-input"></div>
+                            <div class="wire-input"></div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="screen">
+                <h2>6. Receipt (payment_receipt.php)</h2>
+                <div class="frame">
+                    <div class="wire-nav"></div>
+                    <div class="wire-card" style="height: 44px; margin-bottom: 8px;"></div>
+                    <div class="wire-table">
+                        <div class="wire-table-row"></div>
+                        <div class="wire-table-row"></div>
+                        <div class="wire-table-row"></div>
+                        <div class="wire-table-row"></div>
+                        <div class="wire-table-row"></div>
+                    </div>
+                    <div style="margin-top: 8px;">
+                        <div class="wire-btn"></div>
+                        <div class="wire-btn" style="margin-left: 6px;"></div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="screen">
+                <h2>7. Admin - Main Shell (admin_dashboard.php)</h2>
+                <div class="frame">
+                    <div class="wire-nav"></div>
+                    <div class="wire-hero"></div>
+                    <div class="wire-admin">
+                        <aside class="wire-side">
+                            <div class="wire-menu-item"></div>
+                            <div class="wire-menu-item"></div>
+                            <div class="wire-menu-item"></div>
+                            <div class="wire-menu-item"></div>
+                            <div class="wire-menu-item"></div>
+                            <div class="wire-menu-item"></div>
+                        </aside>
+                        <section class="wire-main">
+                            <div class="wire-card" style="height: 52px; margin-bottom: 8px;"></div>
+                            <div class="wire-row" style="grid-template-columns: 1fr 1fr 1fr;">
+                                <div class="wire-card"></div>
+                                <div class="wire-card"></div>
+                                <div class="wire-card"></div>
+                            </div>
+                            <div class="wire-table">
+                                <div class="wire-table-row"></div>
+                                <div class="wire-table-row"></div>
+                                <div class="wire-table-row"></div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </article>
+
+            <article class="screen">
+                <h2>8. Admin - Section Variants</h2>
+                <div class="frame">
+                    <div class="wire-alert"></div>
+                    <div class="wire-form">
+                        <div class="wire-row">
+                            <div class="wire-input"></div>
+                            <div class="wire-input"></div>
+                            <div class="wire-input"></div>
+                        </div>
+                        <div class="wire-btn" style="width: 100%;"></div>
+                    </div>
+                    <div class="wire-table" style="margin-bottom: 8px;">
+                        <div class="wire-table-row"></div>
+                        <div class="wire-table-row"></div>
+                        <div class="wire-table-row"></div>
+                    </div>
+                    <div class="wire-chart"></div>
+                    <div class="wire-chart"></div>
+                </div>
+            </article>
+        </main>
+
+        <section class="legend">
+            <p><strong>Wire style</strong> Low-fidelity grayscale boxes for structure only.</p>
+            <p><strong>Covers</strong> Home, branches, auth, customer booking flow, payment, receipt, and owner dashboard modules.</p>
+            <p><strong>Use</strong> Open this file in browser, then annotate blocks before UI polishing.</p>
+        </section>
+    </div>
+</body>
+</html>
